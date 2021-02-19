@@ -1,2 +1,4 @@
-package co.unbosque.fourpawscitizens.model;public class Manager {
+package co.unbosque.fourpawscitizens.model;
+
+public class Manager {
 }
