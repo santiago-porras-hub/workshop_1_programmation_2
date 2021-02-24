@@ -2,35 +2,32 @@ package co.unbosque.fourpawscitizens.model;
 
 import co.unbosque.fourpawscitizens.model.daos.Pet;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Manager {
 
-    File file= new File("C:\\Users\\santi\\workshop_1_programmation_2\\src\\co\\unbosque\\fourpawscitizens\\model\\daos\\pets-citizens.csv");
-
-    Pet pet= new Pet();
-
-    ArrayList <Pet> pets = new ArrayList<Pet>();
-
-    ArrayList <String> list= new ArrayList<String>();
+    File file = new File("C:\\Users\\santi\\workshop_1_programmation_2\\src\\co\\unbosque\\fourpawscitizens\\model\\daos\\pets-citizens.csv");
 
 
+    ArrayList<Pet> pets = new ArrayList<Pet>();
 
-    public Manager(){
+    ArrayList<String> list = new ArrayList<String>();
 
-        pets= readFile(file);
-        this.readFile(file);
+    public Manager() {
+
+        this.readFile();
         this.readCsv();
+        System.out.println(pets.size());
+        for (int i = 0; i < pets.size(); i++) {
+            System.out.println(pets.get(i).isPotentDangerous());
+        }
     }
 
-    public void update (){
-
+    public void update() {
 
 
         for (int i = 0; i < pets.size(); i++) {
@@ -40,49 +37,55 @@ public class Manager {
         }
 
     }
-    public ArrayList<Pet> readFile(File file)  {
 
+    public void readFile() {
+        BufferedReader bReader = null;
         try {
-            if (file.exists()) {
-                BufferedReader bReader = new BufferedReader(new FileReader(file));
-                ArrayList<Pet> listOfPets = new ArrayList<Pet>();
-                Scanner scanner;
-                scanner = new Scanner(file);
+                bReader = new BufferedReader(new FileReader("C:\\Users\\santi\\workshop_1_programmation_2\\src\\co\\unbosque\\fourpawscitizens\\model\\daos\\pets-citizens.csv"));
+                String line = bReader.readLine();
 
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    Scanner separate = new Scanner(line);
-                    separate = new Scanner(line);
-                    separate.useDelimiter("\\s*,\\s*");
-                    Pet pet= new Pet();
+                while (line != null) {
+                    Pet pet = new Pet();
+                    try {
+                        String[] field = line.split(";");
+                        if (field.length == 6) {
+                            pet.setMicrochip(Long.parseLong(field[0]));
+                            pet.setSpecies(field[1]);
+                            pet.setSex(field[2]);
+                            pet.setSize(field[3]);
+                            if (field[4].equals("NO")) {
+                                field[4] = "false";
+                            } else if (field[4].equals("SI")) {
+                                field[4] = "true";
+                            }
+                            pet.setPotentDangerous(Boolean.parseBoolean(field[4]));
+                            pet.setNeighborhood(field[5]);
 
-                    pet.setMicrochip(separate.nextLong());
-                    pet.setSpecies(separate.next());
-                    pet.setSex(separate.next());
-                    pet.setSize(separate.next());
-                    pet.setPotentDangerous(separate.nextBoolean());
+                            pets.add(pet);
+                        }
 
-                    listOfPets.add(pet);
+                    } catch (NumberFormatException e) {
+
+                    }
+                    line = bReader.readLine();
                 }
 
-                bReader.close();
-                return listOfPets;
+            } catch(IOException e){
 
-            } else {
-                return null;
+            } finally{
+                if (bReader != null) {
+                    try {
+                        bReader.close();
+                    } catch (IOException e) {
 
+                    }
+                }
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            return null;
 
         }
 
-    }
 
-    /**
-     * 
-     */
+
     public static final String SEPARATE = ",";
 
     public void readCsv() {
@@ -99,27 +102,20 @@ public class Manager {
                 // Sepapar la linea leída con el separador definido previamente
                 String[] field = line.split(SEPARATE);
 
-                System.out.println(Arrays.toString(field));
-
                 // Volver a leer otra línea del fichero
                 line = bufferLecture.readLine();
             }
-        }
-        catch (IOException | NumberFormatException e) {
+        } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             // Cierro el buffer de lectura
             if (bufferLecture != null) {
                 try {
                     bufferLecture.close();
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
-
-
 }
