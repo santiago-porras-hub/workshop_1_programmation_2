@@ -8,7 +8,6 @@ public class Pet {
     private String size;
     private String neighborhood;
     private boolean potentDangerous;
-
     private String id;
 
     public Pet() {
