@@ -108,7 +108,7 @@ public class Manager {
 
     }
 
-    public String assignID() {
+    public void assignID() {
 
         String g = null;
         String d = null;
@@ -135,10 +135,10 @@ public class Manager {
             }
             String f = this.pets.get(i).getNeighborhood().substring(0);
 
-            g = this.pets.get(i).getId();
-            System.out.println("The Id is : " + aux + "-" + b + "-" + c + "-" + q + "-" + e +  "-" + q + "-" + f);
+            String id = aux + "-" + b + "-" + c + "-" + q + "-" + e + "-" + q + "-" + f;
+            this.pets.get(i).setId(id);
+
         }
-        return g;
 
     }
 
