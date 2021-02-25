@@ -113,26 +113,30 @@ public class Manager {
         String g = null;
         String d = null;
         String e = null;
-        String aux="";
+        String aux = "";
         for (int i = 0; i < pets.size(); i++) {
 
-            long a = this.pets.get(i).getMicrochip();
+            String a = "" + this.pets.get(i).getMicrochip();
 
-            int b = Integer.parseInt(this.pets.get(i).getSpecies().substring(1));
+            aux = a.substring(a.length() - 3, a.length());
 
-            int c = Integer.parseInt(this.pets.get(i).getSex().substring(1));
+            String b = this.pets.get(i).getSpecies().substring(0);
 
-            this.pets.get(i).getSize().indexOf(0);
+            String c = this.pets.get(i).getSex().substring(0);
 
-            if (this.pets.get(i).isPotentDangerous() == true) {
-                d = "T";
-            } else if (this.pets.get(i).isPotentDangerous() == false) {
+            String q = this.pets.get(i).getSize().substring(0);
+
+            if (this.pets.get(i).isPotentDangerous() == false) {
+                e = "T";
+
+            } else if (this.pets.get(i).isPotentDangerous() == true) {
                 e = "F";
+
             }
-            String f = this.pets.get(i).getNeighborhood();
+            String f = this.pets.get(i).getNeighborhood().substring(0);
 
             g = this.pets.get(i).getId();
-            System.out.println("The Id is : " + a + "-" + b + "-" + c + "-" + d + "-" + e + "-" + f);
+            System.out.println("The Id is : " + aux + "-" + b + "-" + c + "-" + q + "-" + e +  "-" + q + "-" + f);
         }
         return g;
 
