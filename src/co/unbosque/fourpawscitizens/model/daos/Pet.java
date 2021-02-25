@@ -2,13 +2,13 @@ package co.unbosque.fourpawscitizens.model.daos;
 
 public class Pet {
 
-    private String id;
+    private long microchip;
     private String species;
     private String sex;
     private String size;
     private String neighborhood;
-    private long microchip;
     private boolean potentDangerous;
+    private String id;
 
     public Pet() {
 
