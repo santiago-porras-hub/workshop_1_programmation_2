@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"co.unbosque.fourpawscitizens"},{"l":"co.unbosque.fourpawscitizens.model"},{"l":"co.unbosque.fourpawscitizens.model.dtos"}]
