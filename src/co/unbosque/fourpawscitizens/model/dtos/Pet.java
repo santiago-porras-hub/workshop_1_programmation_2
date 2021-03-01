@@ -57,14 +57,14 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "Pet{" +
-                "microchip=" + microchip +
-                ", species='" + species + '\'' +
-                ", sex='" + sex + '\'' +
-                ", size='" + size + '\'' +
-                ", neighborhood='" + neighborhood + '\'' +
-                ", potentDangerous=" + potentDangerous +
-                ", id='" + id + '\'' +
+        return "Pet{" +"\n"+
+                " microchip=" + microchip +"\n"+
+                " species=" + species + "\n" +
+                " sex=" + sex + "\n" +
+                " size=" + size + "\n" +
+                " neighborhood=" + neighborhood + "\n" +
+                " potentDangerous=" + potentDangerous +
+                " id=" + id + "\n" +
                 '}';
     }
 

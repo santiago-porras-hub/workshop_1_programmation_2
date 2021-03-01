@@ -22,14 +22,10 @@ public class Manager {
      */
     public Manager() {
 
+
         this.readFile();
         this.readCsv();
-        this.assignID();
-        long numero = 978101081928801l;
-        this.findByMicrochip(0);
-        this.countBySpecies(null);
-        this.findBypotentDangerousInNeighborhood(0,null,null);
-        this.findByMultipleFields(null,null,null,null);
+
 
 
     }
@@ -43,23 +39,23 @@ public class Manager {
 
         BufferedReader bufferLecture = null;
         try {
-            // Abrir el .csv en buffer de lectura
-            bufferLecture = new BufferedReader(new FileReader("C:\\Users\\santi\\workshop_1_programmation_2\\src\\co\\unbosque\\fourpawscitizens\\model\\daos\\pets-citizens.csv"));
 
-            // Leer una linea del archivo
+            bufferLecture = new BufferedReader(new FileReader("C:\\Users\\santi\\workshop_1_programmation_2\\src\\co\\unbosque\\fourpawscitizens\\model\\dtos\\pets-citizens.csv"));
+
+
             String line = bufferLecture.readLine();
 
             while (line != null) {
-                // Sepapar la linea leída con el separador definido previamente
+
                 String[] field = line.split(SEPARATE);
 
-                // Volver a leer otra línea del fichero
+
                 line = bufferLecture.readLine();
             }
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
         } finally {
-            // Cierro el buffer de lectura
+
             if (bufferLecture != null) {
                 try {
                     bufferLecture.close();
@@ -77,7 +73,7 @@ public class Manager {
     public void readFile() {
         BufferedReader bReader = null;
         try {
-            bReader = new BufferedReader(new FileReader("C:\\Users\\santi\\workshop_1_programmation_2\\src\\co\\unbosque\\fourpawscitizens\\model\\daos\\pets-citizens.csv"));
+            bReader = new BufferedReader(new FileReader("C:\\Users\\santi\\workshop_1_programmation_2\\src\\co\\unbosque\\fourpawscitizens\\model\\dtos\\pets-citizens.csv"));
             String line = bReader.readLine();
 
             while (line != null) {
@@ -169,7 +165,7 @@ public class Manager {
             this.pets.get(i).setId(id);
 
 
-           //System.out.println(pets.get(i).getSize());
+            //System.out.println(pets.get(i).getSize());
         }
     }
 
@@ -196,21 +192,22 @@ public class Manager {
      * This method will count the variable species.
      * <b>pre</b> The field scv must be upload and update <br>
      * <b>post</b> The species has been counted.
+     *
      * @param species variable of pet
      * @return the num of each specie
      */
     public String countBySpecies(String species) {
 
-        int S = 0;
+        int s = 0;
 
         String res = "";
 
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getSpecies().equals(species)) {
 
-                S++;
+                s++;
 
-                res = " El numero de animales de " + species + "es:" + S;
+                res = " El numero de animales de " + species + " es: " + s;
             }
         }
         return res;
@@ -219,8 +216,8 @@ public class Manager {
     /**
      * <b>pre</b> The id might be exist. <br>
      * <b>post</b> The id has been found
-     * @param n a variable of the object pet. n!=0
-     * @param position a variable of the object pet. position!=null
+     * @param n            a variable of the object pet. n!=0
+     * @param position     a variable of the object pet. position!=null
      * @param neighborhood a variable of the object pet. neighborhood!=null
      * @return the id
      */
@@ -228,7 +225,6 @@ public class Manager {
     public String findBypotentDangerousInNeighborhood(int n, String position, String neighborhood) {
 
         String id = "";
-        String res = "";
         ArrayList<Pet> arrDangerous = new ArrayList<Pet>();
 
         for (int i = 0; i < pets.size(); i++) {
@@ -244,7 +240,7 @@ public class Manager {
                 for (int i = 0; i < n; i++) {
                     id = "" + arrDangerous.get(i).toString() + "\n";
                 }
-            } else if("LAST".equals(position)) {
+            } else if ("LAST".equals(position)) {
                 for (int i = arrDangerous.size() - 1; (arrDangerous.size() - n) <= i; i--) {
                     id = id + arrDangerous.get(i).toString() + "\n";
                 }
